@@ -1,0 +1,8 @@
+# GPT Image 2 — Argolink
+
+- Model: gpt-image-2
+- Intent: batch image generation with bounded concurrency
+- Model page: https://argolink.io/gh-gpt-image-2-batch-generation
+- API docs: https://argolink.io/gh-unified-api-docs
+- Examples: examples/request.sh, examples/client.py
+- Contract: docs/model-contract.md
