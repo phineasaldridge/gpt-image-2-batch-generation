@@ -103,6 +103,7 @@ class RunTests(unittest.TestCase):
             record = batchgen.run_job(self.client, job, self.out)
         sleep.assert_called_once_with(3.0)
         body = json.loads(urlopen.call_args.args[0].data)
+        self.assertEqual(urlopen.call_args.args[0].get_header("User-agent"), batchgen.USER_AGENT)
         self.assertEqual((body["n"], body["size"], body["response_format"]), (2, "3840x2160", "b64_json"))
         self.assertEqual([f["tier"] for f in record["files"]], ["4K", "1K"])
         self.assertEqual(record["cost"], 0.035)

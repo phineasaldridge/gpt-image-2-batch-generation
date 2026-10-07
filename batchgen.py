@@ -36,6 +36,8 @@ RATIOS = {"1:1": 1, "3:4": 3 / 4, "4:3": 4 / 3, "2:3": 2 / 3, "3:2": 3 / 2, "9:1
 # Only "slow down" answers are retried in-process. Anything else goes to the manifest, and running the
 # same command again retries it, because finished entries are skipped.
 RETRY_STATUSES = {429, 503}
+# CDNs in front of some endpoints refuse the default "Python-urllib" agent (HTTP 403), so name the client.
+USER_AGENT = "gpt-image-batchgen/1.0"
 
 
 class BatchError(RuntimeError):
@@ -163,6 +165,7 @@ class Client:
     def _post(self, body: dict) -> dict:
         request = urllib.request.Request(self.base_url + "/images/generations", data=json.dumps(body).encode(), method="POST")
         request.add_header("Authorization", f"Bearer {self.api_key}")
+        request.add_header("User-Agent", USER_AGENT)
         request.add_header("Content-Type", "application/json")
         try:
             with urllib.request.urlopen(request, timeout=self.timeout) as response:
