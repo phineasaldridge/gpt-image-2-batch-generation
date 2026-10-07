@@ -4,8 +4,8 @@
 Bounded concurrency, dry runs with a cost estimate, skip-existing, backoff on 429/503, and a JSONL
 manifest of what was made and what it cost. Standard library only; YAML configs need PyYAML.
 
-    export OPENAI_API_KEY=...                       # a key for the endpoint below
-    export OPENAI_BASE_URL=https://argolink.io/v1   # the default; any OpenAI-style Images API works
+    export GPT_IMAGE_API_KEY=...                       # a key for the endpoint below
+    export GPT_IMAGE_BASE_URL=https://argolink.io/v1   # the default; any OpenAI-style Images API works
     python batchgen.py batch.yaml --dry-run
     python batchgen.py batch.yaml --concurrency 4
 """
@@ -245,10 +245,10 @@ def main(argv: list | None = None) -> int:
         print(f"estimate ${estimate:.2f} is above --max-cost ${args.max_cost:.2f}; nothing sent", file=sys.stderr)
         return 2
 
-    api_key = os.environ.get("OPENAI_API_KEY")
+    api_key = os.environ.get("GPT_IMAGE_API_KEY")
     if not api_key:
-        raise SystemExit("set OPENAI_API_KEY")
-    client = Client(api_key, os.environ.get("OPENAI_BASE_URL") or DEFAULT_BASE_URL)
+        raise SystemExit("set GPT_IMAGE_API_KEY (and GPT_IMAGE_BASE_URL for an endpoint other than the default)")
+    client = Client(api_key, os.environ.get("GPT_IMAGE_BASE_URL") or DEFAULT_BASE_URL)
     os.makedirs(output, exist_ok=True)
     concurrency = max(1, args.concurrency or int(config.get("concurrency", 2)))
     failures, spent = 0, 0.0

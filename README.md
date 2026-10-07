@@ -2,7 +2,7 @@
 
 `batchgen.py` turns a list of prompts into images with GPT Image 2 (or GPT Image 2.5 Flare / Sunburst): bounded concurrency, a dry run that prints the bill before you spend it, skip-existing so a rerun only does what is missing, backoff on rate limits, and a JSONL manifest of every file and its cost. One Python file, standard library only.
 
-It works with any OpenAI-style `/v1/images/generations` endpoint. The default is [ArgoLink](https://argolink.io/gh-gpt-image-2-batch-generation), which bills GPT Image 2 at a flat $0.015 per image up to 2K and $0.02 at 4K, whatever the `quality`.
+It works with any OpenAI-style `/v1/images/generations` endpoint (set `GPT_IMAGE_BASE_URL`). The default is [ArgoLink](https://argolink.io/gh-gpt-image-2-batch-generation), which bills GPT Image 2 at a flat $0.015 per image up to 2K and $0.02 at 4K, whatever the `quality`.
 
 <sub>Last checked: 2026-10-07 (prices and limits below).</sub>
 
@@ -22,8 +22,8 @@ It works with any OpenAI-style `/v1/images/generations` endpoint. The default is
 git clone https://github.com/phineasaldridge/gpt-image-2-batch-generation
 cd gpt-image-2-batch-generation
 pip install pyyaml                         # only for YAML configs; JSON and CSV need nothing
-export OPENAI_API_KEY=your-key             # an ArgoLink key, or your own endpoint's
-# export OPENAI_BASE_URL=https://argolink.io/v1   # the default
+export GPT_IMAGE_API_KEY=your-key          # an ArgoLink key, or your own endpoint's
+# export GPT_IMAGE_BASE_URL=https://your-endpoint/v1   # any other OpenAI-style Images API
 
 python batchgen.py examples/icons.yaml --dry-run
 python batchgen.py examples/icons.yaml --concurrency 4
