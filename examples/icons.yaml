@@ -1,0 +1,27 @@
+# Twelve flat app icons in one style. Dry run first: python batchgen.py examples/icons.yaml --dry-run
+model: gpt-image-2
+output: out/icons
+size: 1024x1024          # 1K tier: $0.015 per image
+quality: medium
+concurrency: 4
+
+style: |
+  Flat vector app icon, rounded square, two-tone palette of teal and cream,
+  thick consistent strokes, centered symbol, plain white background.
+avoid: text, letters, gradients, drop shadows, watermarks
+
+images:
+  calendar: a calendar page with one day circled
+  camera: a vintage camera seen from the front
+  cloud-sync: a cloud with two circular arrows
+  compass: a compass rose
+  inbox: an open inbox tray holding one envelope
+  lock: a closed padlock
+  map-pin: a map pin over a folded map
+  music: two eighth notes joined by a beam
+  rocket: a small rocket lifting off
+  search: a magnifying glass
+  settings: a gear with six teeth
+  weather:
+    prompt: a sun half covered by a cloud
+    count: 2             # two variants: weather_001.png, weather_002.png

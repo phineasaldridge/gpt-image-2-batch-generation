@@ -1,0 +1,15 @@
+{
+  "model": "gpt-image-2.5-flare",
+  "output": "out/mugs",
+  "size": "1440x1920",
+  "quality": "high",
+  "concurrency": 3,
+  "style": "Studio product photo of a ceramic coffee mug on a light oak table, soft daylight from the left, shallow depth of field.",
+  "avoid": "text, logos, hands",
+  "images": {
+    "mug-sage": {"prompt": "Matte sage green glaze."},
+    "mug-terracotta": {"prompt": "Speckled terracotta glaze."},
+    "mug-midnight": {"prompt": "Glossy midnight blue glaze with a thin white rim."},
+    "mug-oat": {"prompt": "Oat-colored glaze, with steam rising from fresh coffee.", "count": 3}
+  }
+}
